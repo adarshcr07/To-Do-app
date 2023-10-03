@@ -14,34 +14,50 @@ class Loginpagestate extends State<Loginpage> {
   TextEditingController passcontroller = TextEditingController();
 
   bool isLoggedin = false;
-  String user = '';
-  String pass = '';
+  /*String user = '';
+  String pass = '';*/
 
   void initState() {
     super.initState();
-    Login();
+    LoginStatus();
   }
 
-  void Login() async {
+  LoginStatus() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    user = prefs.getString('username') ?? '';
-    pass = prefs.getString('password') ?? '';
+    bool isLoggedin = prefs.getBool('isLoggedin') ?? false;
 
-    if (user.isNotEmpty && pass.isNotEmpty) {
-      isLoggedin = true;
+    if (isLoggedin) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? storedUsername = prefs.getString('username');
+      String? storedPassword = prefs.getString('password');
+      if (storedUsername != null && storedPassword != null) {
+        namecontroller.text = storedUsername;
+        passcontroller.text = storedPassword;
+      }
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => MyHomePage(
+            user: namecontroller.text,
+          ),
+        ),
+      );
     }
   }
 
-  Future<void> userlogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', namecontroller.text);
-    prefs.setString('password', passcontroller.text);
+  //handeling the login button
+  userlogin() async {
+    String user = namecontroller.text;
+    String pass = passcontroller.text;
 
-    setState(() {
-      isLoggedin = true;
-      user = namecontroller.text;
-      pass = passcontroller.text;
-    });
+    if (user == 'user' && pass == 'password') {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('username', user); // Store username
+      await prefs.setString('password', pass); // Store password
+    } else {
+      Text('error login');
+    }
   }
 
   @override
@@ -127,16 +143,13 @@ class Loginpagestate extends State<Loginpage> {
                 child: Center(
                   child: TextButton(
                       onPressed: () async {
-                        userlogin();
                         if (formKey.currentState!.validate()) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => MyHomePage(
-                                title: 'test',
-                              ),
-                            ),
-                          );
+                          // userlogin()?
+
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return MyHomePage(user: namecontroller.text);
+                          }));
                         } else {
                           print(Text('LOGIN ERROR'));
                           return;

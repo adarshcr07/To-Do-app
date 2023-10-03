@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/view_model/home_page_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.user});
 
-  final String title;
+  final String user;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                     builder: (context, pointer, child) {
                   return AlertDialog(
                     title: Text(
-                      'Create The Task',
+                      'Create The Task for ${user}',
                       style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                               color: Color.fromARGB(255, 29, 66, 129),
