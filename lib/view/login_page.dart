@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:to_do_app/services/firebase_services.dart';
 import 'package:to_do_app/view/home_page.dart';
+
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Loginpage extends StatefulWidget {
   @override
@@ -60,6 +63,8 @@ class Loginpagestate extends State<Loginpage> {
     }
   }
 
+  final remoteconfig = FirebaseRemoteConfigService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +72,9 @@ class Loginpagestate extends State<Loginpage> {
           toolbarHeight: MediaQuery.of(context).size.height / 2.5,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(60))),
-          backgroundColor: const Color.fromARGB(255, 51, 113, 221),
+          backgroundColor: Color.fromARGB(255, 54, 73, 95),
           shadowColor: Colors.black,
-          elevation: 20,
+          elevation: 30,
           title: Center(
             child: Text(
               'Welcome',
@@ -137,14 +142,14 @@ class Loginpagestate extends State<Loginpage> {
                 height: MediaQuery.of(context).size.height / 14,
                 width: MediaQuery.of(context).size.width / 3.5,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 51, 113, 221),
+                  color: Color.fromARGB(255, 54, 73, 95),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Center(
                   child: TextButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          // userlogin()?
+                          //  userlogin()?
 
                           Navigator.pushReplacement(context, MaterialPageRoute(
                               builder: (BuildContext context) {
@@ -162,6 +167,39 @@ class Loginpagestate extends State<Loginpage> {
                             fontSize: 25,
                             fontWeight: FontWeight.w600),
                       )),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 2,
+            ),
+            //underlined text button which navigates to whatsap
+            TextButton(
+              onPressed: () async {
+                //getting the remoteconfig data
+                String whatnum = remoteconfig
+                    .getString(FirebaseRemoteConfigKeys.whatsapNumber);
+                print('anser $whatnum');
+
+                String message =
+                    remoteconfig.getString(FirebaseRemoteConfigKeys.message);
+
+                print(" mess $message");
+                String whatsurl =
+                    'https://wa.me/$whatnum/?text=${Uri.parse(message)}';
+                if (await canLaunchUrlString(whatsurl)) {
+                  await launchUrlString(whatsurl);
+                } else {
+                  throw "Error occured sending an email";
+                }
+                debugPrint('clickedd');
+              },
+              child: const Text(
+                'Need Any Help!',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 54, 73, 95),
+                  decoration: TextDecoration.underline,
                 ),
               ),
             )

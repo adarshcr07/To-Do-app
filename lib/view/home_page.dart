@@ -12,12 +12,13 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(
           'To do',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 51, 113, 221),
+        backgroundColor: Color.fromARGB(255, 54, 73, 95),
         elevation: 20,
         shadowColor: Color.fromARGB(255, 14, 14, 14),
       ),
@@ -151,52 +152,65 @@ class MyHomePage extends StatelessWidget {
                 });
               });
         },
-        backgroundColor: const Color.fromARGB(255, 51, 113, 221),
+        backgroundColor: Color.fromARGB(255, 54, 73, 95),
         child: Icon(
-          Icons.add,
+          Icons.playlist_add,
           color: Colors.white,
         ),
       ),
       body: Consumer<HomeviewModel>(builder: (context, pointer, child) {
-        return ListView.builder(
-            itemCount: pointer.Mainlist.length,
-            itemBuilder: (BuildContext context, int index) {
-              var item = pointer.Mainlist[index];
-              return Dismissible(
-                  key: ValueKey(item),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                            "${pointer.Mainlist[index]['key1']} deleated")));
-                    Provider.of<HomeviewModel>(context, listen: false)
-                        .Mainlist
-                        .removeAt(index);
-                  },
-                  background:
-                      Container(color: const Color.fromARGB(255, 185, 32, 21)),
-                  child: ListTile(
-                    title: Container(
-                      height: 60,
-                      margin: EdgeInsets.only(top: 7),
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.indigo),
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(13))),
-                      child: Center(
-                        child: Text(
-                          '${pointer.Mainlist[index]['key1']} on ${pointer.Mainlist[index]['key2']}',
-                          style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontSize: 25,
-                              textStyle: TextStyle(
-                                fontWeight: FontWeight.w500,
-                              )),
+        return Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [pointer.startColor, pointer.endColor],
+          )),
+          child: ListView.builder(
+              itemCount: pointer.Mainlist.length,
+              itemBuilder: (BuildContext context, int index) {
+                var item = pointer.Mainlist[index];
+                return Dismissible(
+                    key: ValueKey(item),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              "${pointer.Mainlist[index]['key1']} deleated")));
+                      Provider.of<HomeviewModel>(context, listen: false)
+                          .Mainlist
+                          .removeAt(index);
+                    },
+                    background: Container(
+                        color: const Color.fromARGB(255, 185, 32, 21)),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.alarm,
+                        color: Color.fromARGB(255, 58, 79, 104),
+                      ),
+                      title: Container(
+                        height: 60,
+                        margin: EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                            //border: Border.all(width: 2, color: Colors.indigo),
+                            color: Color.fromARGB(255, 54, 73, 95),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Center(
+                          child: Text(
+                            '${pointer.Mainlist[index]['key1']} on ${pointer.Mainlist[index]['key2']}',
+                            style: GoogleFonts.roboto(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontSize: 25,
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                )),
+                          ),
                         ),
                       ),
-                    ),
-                  ));
-            });
+                    ));
+              }),
+        );
       }),
     );
   }

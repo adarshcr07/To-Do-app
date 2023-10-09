@@ -41,6 +41,10 @@ dependencies:
   form_field_validator: ^1.1.0
   shared_preferences: ^2.2.0
   provider: ^6.0.5
+  url_launcher: ^6.1.14
+  firebase_core: ^2.17.0
+  firebase_remote_config: ^4.2.7
+  firebase_analytics: ^10.5.1
 
 dev_dependencies:
   flutter_test:
