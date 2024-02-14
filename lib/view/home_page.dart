@@ -14,13 +14,13 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'To do',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromARGB(255, 54, 73, 95),
+        backgroundColor: const Color.fromARGB(255, 54, 73, 95),
         elevation: 20,
-        shadowColor: Color.fromARGB(255, 14, 14, 14),
+        shadowColor: const Color.fromARGB(255, 14, 14, 14),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
@@ -37,56 +37,57 @@ class MyHomePage extends StatelessWidget {
                     title: Text(
                       'Create The Task for ${user}',
                       style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               color: Color.fromARGB(255, 29, 66, 129),
                               fontWeight: FontWeight.bold)),
                     ),
                     content: SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Form(
                             child: Column(
                           children: [
                             TextFormField(
                               controller: pointer.taskdetails,
                               decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10.0),
                                       ),
                                       borderSide: BorderSide(
-                                        color: const Color.fromARGB(
-                                            255, 51, 113, 221),
+                                        color:
+                                            Color.fromARGB(255, 51, 113, 221),
                                         width: 2,
                                       )),
                                   labelText: 'Task Details',
                                   labelStyle: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                     color: Color.fromARGB(255, 29, 66, 129),
                                     fontWeight: FontWeight.w600,
                                   )),
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.article,
                                     color: Color.fromARGB(255, 29, 66, 129),
                                   )),
                             ),
                             TextField(
                               decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10.0),
                                       ),
                                       borderSide: BorderSide(
-                                        color: const Color.fromARGB(
-                                            255, 51, 113, 221),
+                                        color:
+                                            Color.fromARGB(255, 51, 113, 221),
                                         width: 2,
                                       )),
                                   labelText: 'DATE',
                                   labelStyle: GoogleFonts.roboto(
-                                    color: Color.fromARGB(255, 29, 66, 129),
+                                    color:
+                                        const Color.fromARGB(255, 29, 66, 129),
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  icon: Icon(Icons.calendar_today,
+                                  icon: const Icon(Icons.calendar_today,
                                       color: Color.fromARGB(255, 29, 66, 129))),
                               controller: pointer.dateinput,
                               readOnly: true,
@@ -127,7 +128,7 @@ class MyHomePage extends StatelessWidget {
                             Navigator.of(context).pop();
                             pointer.resetfieald();
                           },
-                          child: Text(
+                          child: const Text(
                             'Dont Save',
                             style: TextStyle(
                               color: Color.fromARGB(255, 29, 66, 129),
@@ -140,7 +141,7 @@ class MyHomePage extends StatelessWidget {
                             Navigator.of(context).pop();
                             pointer.resetfieald();
                           },
-                          child: Text(
+                          child: const Text(
                             'Add to Task',
                             style: TextStyle(
                               color: Color.fromARGB(255, 29, 66, 129),
@@ -152,8 +153,8 @@ class MyHomePage extends StatelessWidget {
                 });
               });
         },
-        backgroundColor: Color.fromARGB(255, 54, 73, 95),
-        child: Icon(
+        backgroundColor: const Color.fromARGB(255, 54, 73, 95),
+        child: const Icon(
           Icons.playlist_add,
           color: Colors.white,
         ),
@@ -184,14 +185,14 @@ class MyHomePage extends StatelessWidget {
                     background: Container(
                         color: const Color.fromARGB(255, 185, 32, 21)),
                     child: ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.alarm,
                         color: Color.fromARGB(255, 58, 79, 104),
                       ),
                       title: Container(
                         height: 60,
-                        margin: EdgeInsets.only(top: 7),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsets.only(top: 7),
+                        decoration: const BoxDecoration(
                             //border: Border.all(width: 2, color: Colors.indigo),
                             color: Color.fromARGB(255, 54, 73, 95),
                             borderRadius:
@@ -200,9 +201,9 @@ class MyHomePage extends StatelessWidget {
                           child: Text(
                             '${pointer.Mainlist[index]['key1']} on ${pointer.Mainlist[index]['key2']}',
                             style: GoogleFonts.roboto(
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                                 fontSize: 25,
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                 )),
                           ),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class HomeviewModel extends ChangeNotifier {
   List Mainlist = [];
-
+//text editing controller for text field
   TextEditingController dateinput = TextEditingController();
-  //text editing controller for text field
+  
   TextEditingController taskdetails = TextEditingController();
 
   //colors for the homepage background

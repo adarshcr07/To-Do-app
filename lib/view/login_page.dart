@@ -17,14 +17,13 @@ class Loginpagestate extends State<Loginpage> {
   TextEditingController passcontroller = TextEditingController();
 
   bool isLoggedin = false;
-  /*String user = '';
-  String pass = '';*/
 
   void initState() {
     super.initState();
     LoginStatus();
   }
 
+  // ignore: non_constant_identifier_names
   LoginStatus() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedin = prefs.getBool('isLoggedin') ?? false;
